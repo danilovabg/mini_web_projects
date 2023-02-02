@@ -2,7 +2,15 @@
 title: 1. Simpsone file
 layout: page
 ---
+
+<input id={
+  "data": [
+     : string, // represents image data as base64 string of 'img' image component
+  ]
+} type="file">
+<div id="results"></div>
 <script>
+    
 import fetch from "node-fetch";
 async function query(data) {
     const response = await fetch(
