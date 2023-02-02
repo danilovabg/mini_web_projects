@@ -5,9 +5,16 @@ layout: page
 <form>
 
 <input id="photo" type="file">
-<div id="results"></div>
 </form>	
+<div id="results"></div>
+
 <script>  
+   input.addEventListener("change", () => {
+   const file = input.files
+  })
+  function displayImages() {
+  let images = ""
+  }
   import fetch from "node-fetch";
   async function query(data) {
     const response = await fetch("https://danilovabg-simpsons-classificator.hf.space/run/predict/", {
