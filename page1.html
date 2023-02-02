@@ -15,11 +15,6 @@ layout: page
       "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg==",
 	]
   })})
-.then(r => r.json())
-.then(
-  r => {
-    let data = r.data;
-  }
 );
     const json = await response.json();
     const label = json['data'][0]['confidences'][0]['label'];
