@@ -2,11 +2,14 @@
 title: 1. Simpsone file
 layout: page
 ---
-
+<form>
+<input type="button">
 <input id="photo" type="file">
 <div id="results"></div>
+</form>	
 <script>
-    
+
+	  
   import fetch from "node-fetch";
   async function query(data) {
     const response = await fetch("https://danilovabg-simpsons-classificator.hf.space/run/predict/", {
