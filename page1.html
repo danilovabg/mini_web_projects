@@ -4,11 +4,12 @@ layout: page
 ---
 <form>
 
-<input id="photo" type="file">
+<input id="photo" type="file" accept="image/jpeg, image/png, image/jpg">
 </form>	
 <div id="results"></div>
 
 <script>  
+   const input = document.querySelector("input")
    input.addEventListener("change", () => {
    const file = input.files
   })
