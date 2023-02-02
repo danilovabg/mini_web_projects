@@ -7,9 +7,7 @@ layout: page
 <input id="photo" type="button">
 <div id="results"></div>
 </form>	
-<script>
-
-	  
+<script>  
   import fetch from "node-fetch";
   async function query(data) {
     const response = await fetch("https://danilovabg-simpsons-classificator.hf.space/run/predict/", {
@@ -27,6 +25,11 @@ layout: page
 	);
 
 	}
+    const input = query({
+  "data": [data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg==
+     : string, // represents image data as base64 string of 'img' image component
+  ])
+}
 	query({
 	  "data": [
 	     data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg==: string, // represents image data as base64 string of 'img' image component
