@@ -14,14 +14,16 @@ layout: page
 );
     const json = await response.json();
     const label = json['data'][0]['confidences'][0]['label'];
-    results.innerHTML = `<br/><img src="${reader.result}" width="300"> <p>${label}</p>`
+    const div = document.createElement('div');
+    div.innerHTML = `<br/><img src="${reader.result}" width="300"> <p>${label}</p>`
+    document.body.append(div);
   }
-  function read() {
+  function read(file) {
     const reader = new FileReader();
     reader.addEventListener('load', () => loaded(reader))
-    reader.readAsDataURL(photo.files[0]);
+    reader.readAsDataURL(file);
   }
-  photo.addEventListener('input', read);
+  photos.addEventListener('input', () => { [...photos.files].map(read) });
 
 </script>
 
