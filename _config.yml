@@ -2,5 +2,8 @@ remote_theme: daviddarnes/alembic@main
 plugins:
 - jekyll-remote-theme
 
-title Anna Danilova
-descriptions: studies projects
+title: Jeremy Howard
+description: Some basic examples of client interfaces to a computer vision API
+
+author:
+  name: Jeremy Howard
