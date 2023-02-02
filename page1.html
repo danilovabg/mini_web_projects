@@ -1,0 +1,74 @@
+
+Skip to content
+Pull requests
+Issues
+Codespaces
+Marketplace
+Explore
+@danilovabg
+danilovabg /
+classification
+Public
+
+Cannot fork because you own this repository and are not a member of any organizations.
+
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+
+    Settings
+
+classification/page1.html
+@danilovabg
+danilovabg Rename Gradio.html to page1.html
+Latest commit edcf00c Feb 2, 2023
+History
+1 contributor
+26 lines (23 sloc) 770 Bytes
+---
+title: Simpson classificator
+layout: page
+---
+
+<input id="photo" type ="file">
+<div id="results"></div>
+
+<script>
+	async function loaded(reader) {
+	    const response = await fetch('https://huggingface.co/spaces/danilovabg/simpsons_classificator', {
+		metod: "POST", body: JSON.stringify({"data": [reader.result] }),
+	        headers: {"Content-Type": "application/json" }
+	    });
+	    const json = await response.json();
+	    const label = json['data'][0]['label'];
+	    results.innerHTML = <br/><img scr = "${reader.result}" width = "300"> <p>${label}</p>
+	}
+	function read() {
+		const.reader = new FileReader();
+		reader.addEventListener('load', () => loader(reader))
+		reader.readAsDataURL(photo.files[0]);
+	}
+	proto.addEventListener('input', read);
+</script>
+Footer
+© 2023 GitHub, Inc.
+Footer navigation
+
+    Terms
+    Privacy
+    Security
+    Status
+    Docs
+    Contact GitHub
+    Pricing
+    API
+    Training
+    Blog
+    About
+
+classification/page1.html at master · danilovabg/classification
