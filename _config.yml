@@ -1,0 +1,6 @@
+remote_theme: daviddarnes/alembic@main
+plugins:
+- jekyll-remote-theme
+
+title Anna Danilova
+descriptions: studies projects
