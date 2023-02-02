@@ -25,4 +25,6 @@ seedling currently learn:
     ml
     mySQL
     DL
- - [simpson efficientnet classifier](page1.html)
+
+- [simpson efficientnet classifier](page1.html) h/t nuvic
+
