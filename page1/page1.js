@@ -16,7 +16,7 @@
      */
     function outputResults(result) {
         let resultHTML;
-        result = <img src="${document.querySelector('input[type="file"]').value}">;
+        resultHTML = <img src="${document.querySelector('input[type="file"]').value}">;
 
 
         result.forEach((element) => {
