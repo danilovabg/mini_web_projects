@@ -6,13 +6,13 @@ layout: page
 <meta name="description" content="Dog vs Cat Classifier">
 </head>
 <body>
-    <h1>Dog vs Cat Classifier</h1>
+    <h1>The Simpsons Classifier</h1>
     <label for="image-file">Upload a picture of a dog or a cat:</label>
     <input type="file"
        id="image-file" name="image-file"
        capture="environment" accept="image/*">
 <div>
-<img id="image-preview" src="The_Simpsons_logo.svg" width="700 px">
+<img id="image-preview" src="img/The_Simpsons_logo.svg" width="200 px">
 <script>
 // Change this to your classification URL
 const classificationEndpoint = "https://danilovabg-simpsons-classificator.hf.space/run/predict/"
@@ -70,3 +70,4 @@ selectElement.addEventListener('change', (event) => {
 });
 
 </script>
+<p id="prediction-text">Class...</p>
