@@ -19,7 +19,7 @@
 
         result.forEach((element) => {
             resultHTML = `<hr> ${element.label} <br><br>`;
-            document.getElementById('image-preview').src = element
+  
             if (element.confidences) {
                 
                 element.confidences.forEach((element) => {
