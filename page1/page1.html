@@ -1,75 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css">
-    <title>Simpsons classifier</title>
-</head>
-<body>
-    
-
-
-    <div>
-    <p style="text-align:center;"><img id="image-preview" src="The_Simpsons_logo.svg" width="700 px" >
-     <label for="image-file">Upload a picture of Simpsons cartoon:</label>
-    <header class="container">
-        ---
-        title: 1. Simpsone file
-        layout: page
-        ---
-
-    </header>
-
-    <form class="container">
-        <label>
-            Image
-            <input type="file" name="image_data" accept="image/png, image/jpeg">
-        </label>
-        <button type="submit" >Submit</button>
-    </form>
-    <section class="container result">
-
-    </section>
-    <script src="page1.js" type="text/javascript"></script>
-<footer class = "footer">
-    <div class = "conteiner">
-        <div class = "copyright typeset">
-            <small class = "small"> © Anna D 2023 </small>
-        </div>
-        <nav class = "nav">
-            <ul class = "list list--nav">
-                <li class = "item iten--nav item--current">
-                    <a href = "/mini_web_projects/">Home</a>
-                </li>
-            </ul>
-         </nav>
-     </div>
-</footer>
-
-    <script type="text/javascript">
 (() => {
-  const registerServiceWorker = () => {
-    if (!navigator.serviceWorker) {
-      return;
+    'use strict';
+    const classificationEndpoint = "https://danilovabg-simpsons-classificator.hf.space/run/predict/";
+    const resultsElement = document.querySelector('.result');
+
+    /**
+     * Clear previous results
+     */
+    function resetResultsText() {
+        resultsElement.innerHTML = '';
     }
 
-    navigator.serviceWorker
-      .register("/mini_web_projects/sw.js")
-      .then(registration => {
-        console.log("Service Worker: registered");
-      })
-      .catch(err => {
-        console.log("Service Worker: registration failed ", err);
-      });
-  };
+    /**
+     * Output results on the page
+     * @param {Object} result
+     */
+    function outputResults(result) {
+        let resultHTML;
 
-  registerServiceWorker();
+        result.forEach((element) => {
+            resultHTML = `<hr> ${element.label} <br><br>`;
+
+            if (element.confidences) {
+                element.confidences.forEach((element) => {
+                    resultHTML += `${element}<br>`;
+                });
+            }
+        });
+
+        resultsElement.innerHTML = resultHTML;
+    }
+
+    /**
+     * Convert file to base64
+     * @param {Node} fileInput
+     * @returns {Promise<void>}
+     */
+    async function fileInputToBase64 (fileInput) {
+        debugger;
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(fileInput.files[0]);
+            fileReader.onload = () => resolve(fileReader.result);
+            fileReader.onerror = (error) => reject(error);
+        });
+    }
+
+    /**
+     * Handle form submission
+     * @param {Object} formData
+     */
+    async function formSubmit(formData) {
+        fetch(classificationEndpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData),
+        })
+            .then(res => res.json())
+            .then(res => outputResults(res.data))
+    }
+
+    document.querySelector('form').addEventListener('submit', async (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        resetResultsText();
+
+        const fileInput = e.target.querySelector('input[type="file"]');
+        const encodedFile = await fileInputToBase64(fileInput);
+        const formData = {
+            data: [ encodedFile ]
+        };
+
+        await formSubmit(formData);
+    });
 })();
-</script>
-
-
-</body>
-
-</html>
