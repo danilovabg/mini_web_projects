@@ -17,12 +17,10 @@
     function outputResults(result) {
         let resultHTML;
 
-
         result.forEach((element) => {
-            resultHTML = <hr> ${element.label} <br><br>`;
-  
+            resultHTML = `<hr> ${element.label} <br><br>`;
+
             if (element.confidences) {
-                
                 element.confidences.forEach((element) => {
                     resultHTML += `${element}<br>`;
                 });
