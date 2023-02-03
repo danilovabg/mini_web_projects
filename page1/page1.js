@@ -16,7 +16,7 @@
      * @param {Object} result
      */
     function outputResults(result) {
-        result = `<img src="${document.querySelector('input[type="file"]').value}">`;
+        
         let resultHTML;
 
         result.forEach((element) => {
