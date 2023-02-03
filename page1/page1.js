@@ -19,8 +19,9 @@
 
         result.forEach((element) => {
             resultHTML = `<hr> ${element.label} <br><br>`;
-
+            document.getElementById('image-preview').src = element
             if (element.confidences) {
+                
                 element.confidences.forEach((element) => {
                     resultHTML += `${element}<br>`;
                 });
@@ -41,8 +42,6 @@
             const fileReader = new FileReader();
             fileReader.readAsDataURL(fileInput.files[0]);
             fileReader.onload = () => resolve(fileReader.result);
-             dataUrlFromFile(file).then((dataUrl) => {
-            document.getElementById('image-preview').src = dataUrl;
             fileReader.onerror = (error) => reject(error);
         });
     }
