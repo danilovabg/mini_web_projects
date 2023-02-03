@@ -7,14 +7,14 @@ layout: page
 </head>
 <body>
     <h1>The Simpsons Classifier</h1>
-    <label for="image-file">Upload a picture of a dog or a cat:</label>
+    <label for="image-file">Upload a picture of Simpson cartoon:</label>
     <input type="file"
        id="image-file" name="image-file"
        capture="environment" accept="image/*">
 <div>
-<img id="image-preview" src="img/The_Simpsons_logo.svg" width="200 px">
+<img id="image-preview" src="img/The_Simpsons_logo.svg" width="700 px">
 <script>
-// Change this to your classification URL
+
 const classificationEndpoint = "https://danilovabg-simpsons-classificator.hf.space/run/predict"
 
 function dataUrlFromFile(file) {
@@ -27,7 +27,7 @@ function dataUrlFromFile(file) {
     });
 }
 
-// Send the image to the server for classification
+
 function classifyImage(dataUrl) {
     const jsonData = {"data": [dataUrl]}
     const jsonDataString = JSON.stringify(jsonData);
