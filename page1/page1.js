@@ -74,4 +74,4 @@
 
         await formSubmit(formData);
     });
-})();
+})(); 
