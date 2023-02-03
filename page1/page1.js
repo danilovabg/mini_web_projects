@@ -16,10 +16,10 @@
      */
     function outputResults(result) {
         let resultHTML;
-        resultHTML = <img src="${document.querySelector('input[type="file"]').value}">;
 
 
         result.forEach((element) => {
+            <img src="${document.querySelector('input[type="file"]').value}">;
             resultHTML = `<hr> ${element.label} <br><br>`;
   
             if (element.confidences) {
