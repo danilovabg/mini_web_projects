@@ -48,6 +48,29 @@
          </nav>
      </div>
 </footer>
+
+    <script type="text/javascript">
+(() => {
+  const registerServiceWorker = () => {
+    if (!navigator.serviceWorker) {
+      return;
+    }
+
+    navigator.serviceWorker
+      .register("/mini_web_projects/sw.js")
+      .then(registration => {
+        console.log("Service Worker: registered");
+      })
+      .catch(err => {
+        console.log("Service Worker: registration failed ", err);
+      });
+  };
+
+  registerServiceWorker();
+})();
+</script>
+
+
 </body>
 
 </html>
