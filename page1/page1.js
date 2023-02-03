@@ -1,7 +1,4 @@
---- 
-title: 1. Simpsone file 
-layout: page 
---- 
+
 (() => {
     'use strict';
     const classificationEndpoint = "https://danilovabg-simpsons-classificator.hf.space/run/predict/";
