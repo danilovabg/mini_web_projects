@@ -19,7 +19,7 @@
 
 
         result.forEach((element) => {
-            resultHTML = <img src="${document.querySelector('input[type="file"]').value}">, <hr> ${element.label} <br><br>`;
+            resultHTML = <hr> ${element.label} <br><br>`;
   
             if (element.confidences) {
                 
