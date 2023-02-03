@@ -41,6 +41,8 @@
             const fileReader = new FileReader();
             fileReader.readAsDataURL(fileInput.files[0]);
             fileReader.onload = () => resolve(fileReader.result);
+             dataUrlFromFile(file).then((dataUrl) => {
+            document.getElementById('image-preview').src = dataUrl;
             fileReader.onerror = (error) => reject(error);
         });
     }
