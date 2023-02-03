@@ -20,7 +20,7 @@
         let resultHTML;
 
         result.forEach((element) => {
-            resultHTML = `<hr> ${element.label} <br><br>`;
+            resultHTML = `<hr> ${document.querySelector('input[type="file"]').value} <br><br>`;
 
             if (element.confidences) {
                 element.confidences.forEach((element) => {
