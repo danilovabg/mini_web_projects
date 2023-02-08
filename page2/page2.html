@@ -1,34 +1,82 @@
+
+Skip to content
+Pull requests
+Issues
+Codespaces
+Marketplace
+Explore
+@danilovabg
+nuvic /
+predict_image
+Public
+
+Fork your own copy of nuvic/predict_image
+
+Code
+Issues
+Pull requests
+Actions
+Projects
+Security
+
+    Insights
+
+predict_image/index.html
+@newvicklee
+newvicklee add confidence
+Latest commit 0c6d019 Apr 29, 2022
+History
+1 contributor
+35 lines (35 sloc) 1.49 KB
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css">
-    <title>Simpsons</title>
-    <title>Simpsons Classifier</title></center>
-
-</head>
-<body>
-    <header class="container">
-
-        <h1 align="center">The Simpsons Classifier</h1>
-        <p style="text-align:center"><img id="image-preview" src="The_Simpsons_logo.svg" width="800 px"></p>
-        <h2  align="center">Upload a picture of Simpsone cartoon:<h2>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cat or Dog predictor</title>
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css">
+  </head>
+  <body>
+    <a href="https://github.com/nuvic/predict_image"><img loading="lazy" width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_left_green_007200.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
+    <header>
+        <h1>Predict a dog or cat from an image</h1>
+        <p>Model provided by <a href="https://github.com/fastai/fastai">fastai</a> and api hosted by <a href="https://hf.space/embed/jph00/testing/api" target="_blank">hugging face</a>
+        </p>
+        <a href="https://github.com/nuvic/predict_image" target="_blank">Github Repo</a>
+    </header>
+    <main>
+        <header>
+            <h2>Submit a picture of either a cat or dog</h2>
+            <p id="prediction"></p>
+            <p id="confidences"></p>
+            <p id="error"></p>
         </header>
-
-    <form class="container">
-        <label>
-            Image
-            <input type="file" name="image_data" accept="image/png, image/jpeg">
-        </label>
-        <button type="submit" >Натисни</button>
-
-    </form>
-    <section class="container result">
-
-    </section>
-    <script src="page1.js" type="text/javascript"></script>
-</body>
+        <section>
+            <img id="myImage" height="400" width="400">
+            <form id="form">
+                <label for="fileInput"></label>
+                <input id="fileInput" type="file" onchange="onFileSelected(event)" name="File">
+            </form>
+        </section>
+    </main>
+	<script src="index.js"></script>
+  </body>
 </html>
+Footer
+© 2023 GitHub, Inc.
+Footer navigation
 
+    Terms
+    Privacy
+    Security
+    Status
+    Docs
+    Contact GitHub
+    Pricing
+    API
+    Training
+    Blog
+    About
+
+predict_image/index.html at main · nuvic/predict_image
