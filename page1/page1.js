@@ -1,8 +1,6 @@
-
 (() => {
     'use strict';
-
-    const classificationEndpoint = "https://danilovabg-test.hf.space/run/predict/";
+    const classificationEndpoint = "https://danilovabg-simpsons-classificator.hf.space/run/predict/";
     const resultsElement = document.querySelector('.result');
 
     /**
@@ -17,7 +15,6 @@
      * @param {Object} result
      */
     function outputResults(result) {
-        
         let resultHTML;
 
         result.forEach((element) => {
@@ -43,10 +40,9 @@
         return new Promise((resolve, reject) => {
             const fileReader = new FileReader();
             fileReader.readAsDataURL(fileInput.files[0]);
-            fileReader.onload = (
-            fileReader.src = event.target.result;) => resolve(fileReader.result);
+            fileReader.onload = () => resolve(fileReader.result);
             fileReader.onerror = (error) => reject(error);
-            });
+        });
     }
 
     /**
@@ -72,8 +68,8 @@
         const encodedFile = await fileInputToBase64(fileInput);
         const formData = {
             data: [ encodedFile ]
-        }; 
+        };
 
         await formSubmit(formData);
     });
-})(); 
+})();
