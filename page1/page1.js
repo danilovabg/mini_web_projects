@@ -78,7 +78,7 @@
         const encodedFile = await fileInputToBase64(fileInput);
         const formData = {
             data: [ encodedFile ]
-        };
+        }; 
 
         await formSubmit(formData);
     });
