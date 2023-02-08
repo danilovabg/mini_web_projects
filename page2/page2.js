@@ -1,7 +1,7 @@
 
 (() => {
     'use strict';
-    const classificationEndpoint = "https://danilovabg-test.hf.space/run/predict/";
+    const classificationEndpoint = "https://danilovabg-detection-project.hf.space/run/predict/";
     const resultsElement = document.querySelector('.result');
 
     /**
