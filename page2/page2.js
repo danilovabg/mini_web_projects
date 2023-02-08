@@ -13,7 +13,7 @@ function onFileSelected(event) {
   reader.readAsDataURL(selectedFile);
 
   const predictionEl = document.getElementById('prediction')
-  const confidencesEl = document.getElementById('confidences')
+  //const confidencesEl = document.getElementById('confidences')
   const errorEl = document.getElementById('error')
 
   reader.addEventListener("loadend", function() {             
@@ -35,16 +35,14 @@ function onFileSelected(event) {
             return response.json(); })
             .then(function(json_response) {
 
-              const label = json_response?.data[0]?.label;
+              const imgtag = json_response?.data[0]?.string;
 
               // Get the confidences for cat and dog
               // firstLabel and secondLabel are cat and dog
               // the order changes depending on the category predicted,
               // that's why the variable names are not fixed to catLabel/dogLabel
-              const firstLabel = json_response?.data[0]?.confidences[0]?.label;
-              const firstLabelConfidence = json_response?.data[0]?.confidences[0]?.confidence
-              const secondLabel = json_response?.data[0]?.confidences[1]?.label;
-              const secondLabelConfidence = json_response?.data[0]?.confidences[1]?.confidence
+              //const firstLabel = json_response?.data[0]?.string;
+
 
               // show the prediction
               predictionEl.innerHTML = `🎉 <u>Prediction: ${label}</u> 🎉`
