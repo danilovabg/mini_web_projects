@@ -1,9 +1,7 @@
 
 (() => {
     'use strict';
-    
-    const imgtag = document.getElementById("myImage");
-    imgtag.title = selectedFile.name;
+
     const classificationEndpoint = "https://danilovabg-test.hf.space/run/predict/";
     const resultsElement = document.querySelector('.result');
 
@@ -44,9 +42,15 @@
         debugger;
         return new Promise((resolve, reject) => {
             const fileReader = new FileReader();
-            fileReader.readAsDataURL(fileInput.files[0]);
-            fileReader.onload = () => resolve(fileReader.result);
+            const imgtag = document.getElementById("image_data");
+            imgtag.title = selectedFile.name;
             imgtag.src = event.target.result;
+            fileReader.readAsDataURL(fileInput.files[0]);
+            fileReader.onload = function(event) {
+    // set the div element with "id=myImage" to show the uploaded image file
+    imgtag.src = event.target.result;
+  }; => resolve(fileReader.result);
+            
             fileReader.onerror = (error) => reject(error);
         });
     }
