@@ -20,7 +20,13 @@
     <form class="container">
         <label>
             Image
-            <input type="file" name="image_data" accept="image/png, image/jpeg">
+            <img id="myImage" height="400" width="400">
+            <form id="form">
+                <label for="fileInput"></label>
+                <input id="fileInput" type="file" onchange="onFileSelected(event)" name="File" accept="image/png, image/jpeg">
+            </form>
+            
+            //<input type="file" name="image_data" accept="image/png, image/jpeg">
         </label>
         <button type="submit" >Натисни</button>
 
