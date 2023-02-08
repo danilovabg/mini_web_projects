@@ -1,6 +1,9 @@
 
 (() => {
     'use strict';
+    
+    const imgtag = document.getElementById("myImage");
+    imgtag.title = selectedFile.name;
     const classificationEndpoint = "https://danilovabg-test.hf.space/run/predict/";
     const resultsElement = document.querySelector('.result');
 
@@ -43,6 +46,7 @@
             const fileReader = new FileReader();
             fileReader.readAsDataURL(fileInput.files[0]);
             fileReader.onload = () => resolve(fileReader.result);
+            imgtag.src = event.target.result;
             fileReader.onerror = (error) => reject(error);
         });
     }
