@@ -22,7 +22,17 @@
           processData: false,
           contentType: false,
           success: function(response) {
-            $('#result').html('<img src="' + response + '">');
+            await fetch("https://danilovabg-detection-project.hf.space/run/predict", {
+	method: "POST",
+	headers: { "Content-Type": "application/json" },
+	body: JSON.stringify({
+		data: [
+			"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg==",
+		]
+	})
+});
+
+            $('#result').html('<img src="' + await data.json(); + '">');
           }
         });
       });
