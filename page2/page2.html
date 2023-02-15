@@ -25,7 +25,16 @@
             data: formData,
             processData: false,
             contentType: false,
+            body: JSON.stringify({
+		        data: [
+			        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg==",
+		          ]
+	          })
+            });
+
+            const data = await data.json();
             success: function(data) {
+                           
               var resultImage = data.result_image;
               var imageElement = $('<img>').attr('src', resultImage);
               $('#result-container').empty().append(imageElement);
