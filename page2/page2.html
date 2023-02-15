@@ -6,7 +6,7 @@
   <body>
     <h1>Модель детекции объектов</h1>
     <form method="post" enctype="multipart/form-data" action="https://danilovabg-detection-project.hf.space/run/predict">
-      <input type="file" name="image_file">
+      <input type="file" name="image">
       <input type="submit" value="Предсказать">
     </form>
     <div id="result"></div>
@@ -22,17 +22,17 @@
           processData: false,
           contentType: false,
           success: function(response) {
-            await fetch("https://danilovabg-detection-project.hf.space/run/predict", {
-	method: "POST",
-	headers: { "Content-Type": "application/json" },
-	body: JSON.stringify({
-		data: [
+            const response = await fetch("https://danilovabg-detection-project.hf.space/run/predict", {
+	  method: "POST",
+	  headers: { "Content-Type": "application/json" },
+	  body: JSON.stringify({
+	  	data: [
 			"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg==",
 		]
-	})
-});
-
-            $('#result').html('<img src="' + await data.json(); + '">');
+	  })
+          });
+            const data = await data.json();
+            $('#result').html('<img src="' + data + '">');
           }
         });
       });
