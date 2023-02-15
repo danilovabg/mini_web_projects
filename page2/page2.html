@@ -1,13 +1,31 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Загрузить изображение</title>
-</head>
-<body>
-	<h1>Загрузить изображение</h1>
-	<form method="POST" action="https://danilovabg-detection-project.hf.space/run/predict" enctype="multipart/form-data">
-		<input type="file" name="image">
-		<input type="submit" value="Предсказать">
-	</form>
-</body>
+  <head>
+    <title>Модель детекции объектов</title>
+  </head>
+  <body>
+    <h1>Модель детекции объектов</h1>
+    <form method="post" enctype="multipart/form-data" action="https://danilovabg-detection-project.hf.space/run/predict">
+      <input type="file" name="image_file">
+      <input type="submit" value="Предсказать">
+    </form>
+    <div id="result"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      $('form').submit(function(event) {
+        event.preventDefault();
+        var formData = new FormData($('form')[0]);
+        $.ajax({
+          url: 'https://danilovabg-detection-project.hf.space/run/predict',
+          type: 'POST',
+          data: formData,
+          processData: false,
+          contentType: false,
+          success: function(response) {
+            $('#result').html('<img src="' + response + '">');
+          }
+        });
+      });
+    </script>
+  </body>
 </html>
