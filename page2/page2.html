@@ -20,22 +20,12 @@
 			event.preventDefault();
 
 			const formData = new FormData();
-			formData.append('image');
-			const response = await fetch("https://danilovabg-detection-project.hf.space/run/predict/", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-			data: [
-			"data:image.files[0]/png;base64,
-				]
-				})
+			formData.append('image', image.files[0]);
+
+			const response = await fetch("https://danilovabg-detection-project.hf.space/run/predict", {
+				method: "POST",
+				body: formData
 			});
-						
-		
-			//const response = await fetch("https://danilovabg-detection-project.hf.space/run/predict", {
-			//	method: "POST",
-			//	body: formData
-			//});
 
 			const data = await response.json();
 
