@@ -1,22 +1,39 @@
-const inputImage = document.getElementById("inputImage");
-const submitBtn = document.getElementById("submitBtn");
-const outputImage = document.getElementById("outputImage");
+const express = require("express");
+const multer = require("multer");
+const fs = require("fs");
+const { detect } = require("./detection"); // функция обработки изображения
 
-submitBtn.addEventListener("click", async () => {
-  const imageFile = inputImage.files[0];
-  if (!imageFile) return alert("Please select an image.");
-  
-  const reader = new FileReader();
-  reader.readAsDataURL(imageFile);
-  reader.onload = async () => {
-    const imageData = reader.result.split(",")[1];
-    const response = await fetch("https://danilovabg-detection-project.hf.space/run/predict", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ data: [imageData] })
-    });
-    const jsonResponse = await response.json();
-    const outputImageData = jsonResponse.data[0];
-    outputImage.src = `data:image/png;base64,${outputImageData}`;
-  };
+const app = express();
+const upload = multer({ dest: "uploads/" });
+
+app.use(express.static("public"));
+
+app.post("/detect", upload.single("image"), async (req, res) => {
+	if (!req.file) {
+		res.status(400).json({ error: "No image file provided" });
+		return;
+	}
+
+	const image = req.file.buffer;
+	const result = await detect(image);
+
+	if (!result) {
+		res.status(500).json({ error: "Error running object detection" });
+		return;
+	}
+
+	const resultImgPath = "public/result.png";
+
+	fs.writeFile(resultImgPath, result, (err) => {
+		if (err) {
+			res.status(500).json({ error: "Error saving result image" });
+			return;
+		}
+
+		res.json({ result: resultImgPath });
+	});
+});
+
+app.listen(3000, () => {
+	console.log("Server started on port 3000");
 });
