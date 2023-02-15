@@ -1,13 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Image Detection App</title>
+	<title>Object Detection App</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+		}
+		img {
+			max-width: 400px;
+		}
+		#result-img {
+			display: none;
+		}
+	</style>
 </head>
 <body>
-	<input type="file" id="inputImage" accept="image/*"><br><br>
-	<button id="submitBtn">Submit</button><br><br>
-	<img id="outputImage" src="#" alt="Output Image">
-	<script src="app.js"></script>
+	<h1>Object Detection App</h1>
+	<p>Choose an image to run object detection on:</p>
+	<form id="image-form">
+		<input type="file" id="image-input">
+		<button type="submit">Run Object Detection</button>
+	</form>
+	<div>
+		<h2>Result:</h2>
+		<img id="result-img" src="">
+	</div>
+
+	<script>
+		const imageForm = document.getElementById("image-form");
+		const imageInput = document.getElementById("image-input");
+		const resultImg = document.getElementById("result-img");
+
+		imageForm.addEventListener("submit", async (event) => {
+			event.preventDefault();
+
+			const formData = new FormData();
+			formData.append("image", imageInput.files[0]);
+
+			const response = await fetch("/detect", {
+				method: "POST",
+				body: formData,
+			});
+
+			const responseData = await response.json();
+
+			if (responseData.result) {
+				resultImg.src = responseData.result;
+				resultImg.style.display = "block";
+			} else {
+				alert(responseData.error);
+			}
+		});
+	</script>
 </body>
 </html>
