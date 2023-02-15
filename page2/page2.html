@@ -2,38 +2,38 @@
 <html>
   <head>
     <title>Модель детекции объектов</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
     <h1>Модель детекции объектов</h1>
-    <form method="post" enctype="multipart/form-data" action="https://danilovabg-detection-project.hf.space/run/predict">
-      <input type="file" name="image">
-      <input type="submit" value="Предсказать">
+    <form>
+      <label for="image-input">Выберите изображение:</label>
+      <input type="file" id="image-input" accept="image/*">
+      <button type="submit" id="submit-button">Предсказать</button>
     </form>
-    <div id="result"></div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <div id="result-container"></div>
     <script>
-      $('form').submit(function(event) {
-        event.preventDefault();
-        var formData = new FormData($('form')[0]);
-        $.ajax({
-          url: 'https://danilovabg-detection-project.hf.space/run/predict',
-          type: 'POST',
-          data: formData,
-          processData: false,
-          contentType: false,
-          success: function(response) {
-            const response = await fetch("https://danilovabg-detection-project.hf.space/run/predict", {
-	  method: "POST",
-	  headers: { "Content-Type": "application/json" },
-	  body: JSON.stringify({
-	  	data: [
-			"data:image/png;base64,
-		]
-	  })
+      $(document).ready(function() {
+        $('form').on('submit', function(e) {
+          e.preventDefault();
+          var image = $('#image-input')[0].files[0];
+          var formData = new FormData();
+          formData.append('image', image);
+          $.ajax({
+            url: 'https://danilovabg-detection-project.hf.space/run/predict',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(data) {
+              var resultImage = data.result_image;
+              var imageElement = $('<img>').attr('src', resultImage);
+              $('#result-container').empty().append(imageElement);
+            },
+            error: function() {
+              $('#result-container').text('Произошла ошибка при отправке запроса.');
+            }
           });
-            const data = await data.json();
-            $('#result').html('<img src="' + data + '">');
-          }
         });
       });
     </script>
