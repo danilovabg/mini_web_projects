@@ -1,55 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Image Detection</title>
-	<script type="text/javascript">
-		function detectImage() {
-			// Получаем изображение
-			var input = document.getElementById('inputImage');
-			var file = input.files[0];
-			var reader = new FileReader();
-			reader.readAsDataURL(file);
-			reader.onload = function() {
-				var imgData = reader.result;
-
-				// Отправляем запрос на сервер для детекции объектов на изображении
-				var xhr = new XMLHttpRequest();
-				xhr.open('POST', 'https://danilovabg-detection-project.hf.space/run/predict', true);
-				xhr.setRequestHeader('Content-Type', 'application/json');
-				xhr.onreadystatechange = function() {
-					if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-						// Обрабатываем ответ
-						var response = JSON.parse(this.responseText);
-						var detections = response.predictions[0];
-
-						// Отображаем результат детекции на странице
-						var canvas = document.getElementById('outputCanvas');
-						var ctx = canvas.getContext('2d');
-						var image = new Image();
-						image.src = imgData;
-						image.onload = function() {
-							canvas.width = image.width;
-							canvas.height = image.height;
-							ctx.drawImage(image, 0, 0);
-							ctx.lineWidth = 2;
-							ctx.strokeStyle = '#00ff00';
-							for (var i = 0; i < detections.length; i++) {
-								var detection = detections[i];
-								ctx.strokeRect(detection.xmin * image.width, detection.ymin * image.height, (detection.xmax - detection.xmin) * image.width, (detection.ymax - detection.ymin) * image.height);
-							}
-						};
-					}
-				};
-				xhr.send(JSON.stringify({ data: [ imgData ] }));
-			};
-		}
-	</script>
+	<meta charset="UTF-8">
+	<title>Image Detection App</title>
 </head>
 <body>
-	<h1>Image Detection</h1>
-	<p>Select an image to detect objects:</p>
-	<input type="file" id="inputImage"><br><br>
-	<button onclick="detectImage()">Detect</button><br><br>
-	<canvas id="outputCanvas"></canvas>
+	<input type="file" id="inputImage" accept="image/*"><br><br>
+	<button id="submitBtn">Submit</button><br><br>
+	<img id="outputImage" src="#" alt="Output Image">
+	<script src="app.js"></script>
 </body>
 </html>
